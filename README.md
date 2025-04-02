@@ -96,6 +96,35 @@ report = analyzer.generate_summary_report(result)
 print(report)
 ```
 
+### Combined Vision and Traditional Analysis
+
+The Vision Integration module provides combined analysis using both OpenRouter Vision and traditional ML models:
+
+```python
+from chart_pattern_analyzer import VisionIntegration
+
+# Initialize integration module
+integrator = VisionIntegration(
+    api_key="your_openrouter_key",
+    model_path="models/pattern_detector.model"
+)
+
+# Analyze a chart using both methods
+result = integrator.analyze_chart("path/to/chart.png", timeframe="Daily")
+
+# Access the combined confidence scores
+print(result["confidence_scores"])
+
+# View the report path
+print(f"Report generated at: {result['report_files']['markdown']}")
+
+# Batch analyze a directory of charts
+batch_results = integrator.batch_analyze_directory(
+    image_dir="charts/",
+    pattern_filter="Double Bottom"  # Optional filter
+)
+```
+
 ### Binance Data Provider
 
 Get real-time and historical data from Binance:
@@ -126,6 +155,7 @@ The application can be configured through various settings:
 - Database settings in `chart_patterns.db`
 - Model settings in `models/pattern_detector.model`
 - Output directory for charts and analysis in `output/`
+- Vision model settings in environment variables
 
 ## Requirements
 
@@ -135,6 +165,7 @@ The application can be configured through various settings:
 - Pandas 1.3+
 - Matplotlib 3.4+
 - NumPy 1.20+
+- Seaborn 0.11+
 - OpenRouter API key (for AI vision analysis)
 - Binance API key (for live market data)
 
@@ -146,6 +177,7 @@ chart_pattern_analyzer/
 ├── chart_analyzer.py          # Core analysis engine
 ├── visualization.py           # Chart visualization components
 ├── openrouter_vision_model.py # OpenRouter Vision integration
+├── vision_integration.py      # Combined vision and traditional analysis
 ├── binance_data_provider.py   # Binance data integration
 ├── live_market_analyzer.py    # Real-time market monitoring
 ├── chart_cli.py               # Command-line interface
@@ -154,6 +186,26 @@ chart_pattern_analyzer/
     ├── index.html             # Main web page
     └── api.js                 # API integration
 ```
+
+## Key Components
+
+### Chart Analyzer
+The core engine that processes chart images using traditional computer vision and ML techniques to detect patterns.
+
+### OpenRouter Vision Analyzer
+Leverages OpenRouter's Vision API to provide AI-powered analysis of chart images, including pattern recognition, trend analysis, and trading recommendations.
+
+### Vision Integration
+Combines results from both traditional ML models and AI vision models to provide comprehensive analysis with enhanced confidence scoring.
+
+### Visualization Module
+Tools for annotating charts, highlighting patterns, and creating visual representations of analysis results.
+
+### Binance Data Provider
+Connects to the Binance API to fetch real-time and historical market data for analysis.
+
+### Web and CLI Interfaces
+User-friendly interfaces for interacting with the analysis engine.
 
 ## Contributing
 
