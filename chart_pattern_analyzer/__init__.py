@@ -8,7 +8,8 @@ from .chart_analyzer import ChartAnalyzer, ChartPatternDatabase, ChartImageProce
 from .visualization import ChartAnnotator, ChartVisualizer
 from .binance_data_provider import BinanceDataProvider
 from .openrouter_vision_model import OpenRouterVisionAnalyzer
+from .vision_integration import VisionIntegration
 from .live_market_analyzer import LiveMarketAnalyzer
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __author__ = "Chart Pattern Analyzer Team"
